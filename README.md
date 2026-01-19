@@ -2,6 +2,8 @@
 
 Microservices-based document processing platform with PDF redaction, format conversion, and manipulation capabilities.
 
+![screenshot](docs/screenshot.png)
+
 ## 🏗️ Architecture
 
 **Frontend** (Next.js) → **API Gateway** (NestJS) → **PDF Service** (FastAPI + PyMuPDF)
@@ -39,7 +41,6 @@ Microservices-based document processing platform with PDF redaction, format conv
 - NestJS + TypeScript
 - PostgreSQL + Prisma
 - JWT authentication
-- Bull Queue for job management
 
 ### PDF Service (FastAPI)
 
