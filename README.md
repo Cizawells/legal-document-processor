@@ -2,8 +2,6 @@
 
 Microservices-based document processing platform with PDF redaction, format conversion, and manipulation capabilities.
 
-![Architecture](docs/architecture-diagram.png)
-
 ## 🏗️ Architecture
 
 **Frontend** (Next.js) → **API Gateway** (NestJS) → **PDF Service** (FastAPI + PyMuPDF)
