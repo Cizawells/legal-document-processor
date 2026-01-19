@@ -1,0 +1,7 @@
+// Add these dependencies to your package.json:
+{
+  "dependencies": {
+    "react-pdf": "^7.5.1",
+    "pdfjs-dist": "^3.11.174"
+  }
+}

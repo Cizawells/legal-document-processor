@@ -1,0 +1,55 @@
+{
+  "name": "legalredactor",
+  "version": "1.0.0",
+  "description": "Automated redaction for legal professionals",
+  "homepage": "https://legalredactor.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cizawells/legalredactor"
+  },
+  "private": true,
+  "scripts": {
+    "dev": "npm run copy-pdf-worker && next dev --turbopack -p 7000",
+    "build": "npm run copy-pdf-worker && next build --turbopack",
+    "start": "next start",
+    "copy-pdf-worker": "node -e \"const fs = require('fs'); const path = require('path'); const src = path.join('node_modules', 'pdfjs-dist', 'build', 'pdf.worker.min.mjs'); const dest = path.join('public', 'pdf-worker', 'pdf.worker.min.js'); fs.mkdirSync(path.dirname(dest), {recursive: true}); fs.copyFileSync(src, dest); console.log('PDF worker copied successfully');\""
+  },
+  "dependencies": {
+    "@auth/core": "^0.40.0",
+    "@auth/prisma-adapter": "^2.10.0",
+    "@headlessui/react": "^2.2.7",
+    "@heroicons/react": "^2.2.0",
+    "@prisma/client": "^6.16.2",
+    "@radix-ui/react-avatar": "^1.1.10",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@lemonsqueezy/lemonsqueezy.js": "^3.2.0",
+    "@types/bcryptjs": "^2.4.6",
+    "axios": "^1.11.0",
+    "bcryptjs": "^3.0.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.545.0",
+    "next": "15.5.2",
+    "next-auth": "^5.0.0-beta.29",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "5.3.93",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-dropzone": "^14.3.8",
+    "react-hot-toast": "^2.6.0",
+    "react-icons": "^5.5.0",
+    "react-pdf": "^10.1.0",
+    "tailwind-merge": "^3.3.1",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20.19.17",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "tailwindcss": "^4",
+    "tw-animate-css": "^1.4.0",
+    "typescript": "^5"
+  }
+}

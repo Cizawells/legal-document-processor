@@ -1,0 +1,141 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Welcome to LegalRedactor</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 2px solid #dc2626;
+      }
+      .logo {
+        font-size: 28px;
+        font-weight: bold;
+        color: #dc2626;
+      }
+      .content {
+        padding: 30px 0;
+      }
+      .button {
+        display: inline-block;
+        padding: 12px 30px;
+        background: #dc2626;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+      .features {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+      }
+      .feature-list {
+        list-style: none;
+        padding: 0;
+      }
+      .feature-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px 0;
+        border-top: 1px solid #eee;
+        color: #666;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='header'>
+        <div class='logo'>⚖️ LegalRedactor</div>
+        <h1>Welcome {{name}}!</h1>
+      </div>
+
+      <div class='content'>
+        <p>Thank you for joining LegalRedactor! Your account has been
+          successfully created and you are ready to start securely redacting and
+          processing your legal documents.</p>
+
+        {{#if isOAuth}}
+          <div
+            style='background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2196f3;'
+          >
+            <p><strong>🔗 Quick Setup Complete!</strong>
+              You signed in with
+              {{provider}}
+              and your LegalRedactor account is ready to use immediately. No
+              password needed - just use your
+              {{provider}}
+              account to sign in securely.</p>
+          </div>
+        {{/if}}
+
+        <div class='features'>
+          <h3>🚀 Powerful Legal Document Tools:</h3>
+          <ul class='feature-list'>
+            <li>🔒
+              <strong>Smart Redaction</strong>
+              - Automatically detect and redact sensitive information</li>
+            <li>🔍
+              <strong>PII Detection</strong>
+              - Find SSNs, phone numbers, addresses, and more</li>
+            <li>📄
+              <strong>Document Merging</strong>
+              - Combine multiple legal documents</li>
+            <li>✂️
+              <strong>Document Splitting</strong>
+              - Extract specific pages or sections</li>
+            <li>📝
+              <strong>PDF Conversion</strong>
+              - Convert to Word, PowerPoint, and other formats</li>
+            <li>🗜️
+              <strong>File Compression</strong>
+              - Reduce file sizes for easy sharing</li>
+            <li>⚖️
+              <strong>Compliance Ready</strong>
+              - HIPAA, GDPR, and legal standard compliant</li>
+          </ul>
+        </div>
+
+        <p>Ready to get started? Access your dashboard and begin securely
+          redacting your first legal document:</p>
+
+        <div style='text-align: center;'>
+          <a href='{{dashboardUrl}}' class='button'>Go to Dashboard</a>
+        </div>
+
+        <p><strong>Need help?</strong>
+          Our legal document specialists are here to assist you at
+          <a href='mailto:{{supportEmail}}'>{{supportEmail}}</a></p>
+      </div>
+
+      <div class='footer'>
+        <p>© {{year}} LegalRedactor. All rights reserved.</p>
+        <p>This email was sent to
+          {{email}}. If you did not create this account, please ignore this
+          email.</p>
+      </div>
+    </div>
+  </body>
+</html>

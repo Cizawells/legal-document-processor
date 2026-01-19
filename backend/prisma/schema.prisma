@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                        String        @id @default(cuid())
+  name                      String
+  email                     String        @unique
+  password                  String
+  plan                      String        @default("free") // free, solo, firm, enterprise
+  lemonSqueezyCustomerId    String?       @unique
+  lemonSqueezySubscriptionId String?      @unique
+  lemonSqueezyProductId     String?
+  lemonSqueezyVariantId     String?
+  subscriptionStatus        String?       // active, canceled, past_due, on_trial, expired
+  trialEndsAt               DateTime?
+  currentPeriodStart        DateTime?
+  currentPeriodEnd          DateTime?
+  cancelAtPeriodEnd         Boolean       @default(false)
+  createdAt                 DateTime      @default(now())
+  updatedAt                 DateTime      @updatedAt
+  subscriptions             Subscription[]
+  usageRecords              UsageRecord[]
+  activities                Activity[]
+  fileRecords               FileRecord[]
+}
+
+model Subscription {
+  id                        String    @id @default(cuid())
+  userId                    String
+  user                      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lemonSqueezySubscriptionId String   @unique
+  lemonSqueezyVariantId     String
+  lemonSqueezyProductId     String
+  status                    String    // active, canceled, past_due, on_trial, expired
+  currentPeriodStart        DateTime
+  currentPeriodEnd          DateTime
+  cancelAtPeriodEnd         Boolean   @default(false)
+  canceledAt                DateTime?
+  trialStart                DateTime?
+  trialEnd                  DateTime?
+  createdAt                 DateTime  @default(now())
+  updatedAt                 DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([lemonSqueezySubscriptionId])
+}
+
+model UsageRecord {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  feature     String   // pii_detection, merge, compress, convert, etc.
+  count       Int      @default(1)
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([feature])
+}
+
+model Activity {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type          String   // redaction, merge, compress, convert, split, etc.
+  action        String   // created, completed, downloaded, failed
+  fileName      String
+  fileSize      String?
+  fileId        String?
+  status        String   // pending, processing, completed, failed
+  metadata      Json?    // Additional data like redaction count, compression ratio, etc.
+  duration      Int?     // Processing time in milliseconds
+  errorMessage  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId, createdAt])
+  @@index([type])
+  @@index([status])
+}
+
+model GuestSession {
+  id              String   @id @default(cuid())
+  ipAddress       String
+  createdAt       DateTime @default(now())
+  expiresAt       DateTime
+  redactionCount  Int      @default(0)
+  mergeCount      Int      @default(0)
+  conversionCount Int      @default(0)
+  splitCount      Int      @default(0)
+  compressionCount Int     @default(0)
+  lastActivity    DateTime @default(now())
+  fileRecords     FileRecord[]
+
+  @@index([ipAddress, createdAt])
+  @@index([expiresAt])
+}
+
+model FileRecord {
+  id             String    @id @default(cuid())
+  fileId         String    @unique  // The actual filename
+  folder         String    // 'uploads' or 'temp'
+  userId         String?   // null for guest users
+  user           User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  guestSessionId String?   // for guest users
+  guestSession   GuestSession? @relation(fields: [guestSessionId], references: [id], onDelete: Cascade)
+  userType       String    // 'guest', 'free', 'paid'
+  fileSize       Int
+  originalName   String
+  mimeType       String
+  service        String    // 'merge', 'redaction', 'conversion', 'compression', etc.
+  createdAt      DateTime  @default(now())
+  expiresAt      DateTime  // Calculated based on user type
+  isDeleted      Boolean   @default(false)
+  deletedAt      DateTime?
+  
+  @@index([expiresAt])
+  @@index([userId])
+  @@index([guestSessionId])
+  @@index([userType])
+  @@index([service])
+  @@index([isDeleted])
+}

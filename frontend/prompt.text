@@ -1,0 +1,1 @@
+there a folder of a nextjs called pdf-merger-frontend for a pdf app with feature of merge_pdf and pdf_to_word, now i want to to implement a pdf_to_split functionality, take the same design that exist in merge_pdf and pdf_to_word but take inpiration from ilovepdf to add customization of the pdf split like sizes , pages, range.
