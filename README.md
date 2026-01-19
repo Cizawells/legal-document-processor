@@ -177,9 +177,9 @@ Key variables:
 - Create admin dashboard for job monitoring
 - Add comprehensive E2E tests
 
-## 📸 Screenshots
+<!-- ## 📸 Screenshots
 
-[Add 2-3 screenshots]
+[Add 2-3 screenshots] -->
 
 ## 📝 License
 
