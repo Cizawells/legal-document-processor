@@ -2,7 +2,7 @@
 
 Microservices-based document processing platform with PDF redaction, format conversion, and manipulation capabilities.
 
-![screenshot](docs/screenshot.png)
+![screenshot](docs/screenshot.PNG)
 
 ## 🏗️ Architecture
 
