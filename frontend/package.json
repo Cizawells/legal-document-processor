@@ -9,7 +9,7 @@
   },
   "private": true,
   "scripts": {
-    "dev": "npm run copy-pdf-worker && next dev --turbopack -p 7000",
+    "dev": "npm run copy-pdf-worker && next dev  -p 7000",
     "build": "npm run copy-pdf-worker && next build --turbopack",
     "start": "next start",
     "copy-pdf-worker": "node -e \"const fs = require('fs'); const path = require('path'); const src = path.join('node_modules', 'pdfjs-dist', 'build', 'pdf.worker.min.mjs'); const dest = path.join('public', 'pdf-worker', 'pdf.worker.min.js'); fs.mkdirSync(path.dirname(dest), {recursive: true}); fs.copyFileSync(src, dest); console.log('PDF worker copied successfully');\""

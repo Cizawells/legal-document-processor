@@ -1,0 +1,40 @@
+# ======================
+# Node.js (ANYWHERE)
+# ======================
+node_modules/
+
+dist/
+build/
+.next/
+out/
+
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ======================
+# Python (ANYWHERE)
+# ======================
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+pdf-service/lib/
+pdf-service/Scripts/
+
+# FastAPI / uvicorn
+*.log
+
+# ======================
+# Environment variables
+# ======================
+.env
+.env.*
+!.env.example
+
+# ======================
+# OS / Editor
+# ======================
+.DS_Store
+.idea/
+.vscode/

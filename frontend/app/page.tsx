@@ -42,16 +42,16 @@ export default function LegalRedactorHomepage() {
   // Check for pending upgrades and refresh session
   useEffect(() => {
     const checkPendingUpgrade = async () => {
-      if (typeof window !== 'undefined') {
-        const pendingUpgrade = window.localStorage.getItem('pendingUpgrade');
-        if (pendingUpgrade === 'true' && session?.user) {
+      if (typeof window !== "undefined") {
+        const pendingUpgrade = window.localStorage.getItem("pendingUpgrade");
+        if (pendingUpgrade === "true" && session?.user) {
           // Remove the flag
-          window.localStorage.removeItem('pendingUpgrade');
-          
+          window.localStorage.removeItem("pendingUpgrade");
+
           // Force session refresh
-          console.log('Refreshing session after upgrade...');
+          console.log("Refreshing session after upgrade...");
           await update();
-          
+
           // Also force a page reload as backup
           setTimeout(() => {
             window.location.reload();
@@ -61,7 +61,7 @@ export default function LegalRedactorHomepage() {
     };
 
     // Check when component mounts and when session changes
-    if (status === 'authenticated') {
+    if (status === "authenticated") {
       checkPendingUpgrade();
     }
   }, [session, status, update]);
@@ -108,21 +108,20 @@ export default function LegalRedactorHomepage() {
   const handleSubscribe = async () => {
     try {
       // Import the subscription functions
-      const { createCheckoutSession, LEMONSQUEEZY_VARIANTS } = await import(
-        "@/lib/stripe"
-      );
+      const { createCheckoutSession, LEMONSQUEEZY_VARIANTS } =
+        await import("@/lib/stripe");
 
       const variantId = LEMONSQUEEZY_VARIANTS["solo"];
       if (!variantId) {
         alert("LemonSqueezy is not configured. Please contact support.");
         return;
       }
-      
+
       // Store callback to refresh session after successful checkout
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem('pendingUpgrade', 'true');
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("pendingUpgrade", "true");
       }
-      
+
       await createCheckoutSession(variantId);
     } catch (error) {
       console.error("Subscription error:", error);
@@ -190,10 +189,10 @@ export default function LegalRedactorHomepage() {
 
   const handleFileUpload = async (
     uploadedFiles: File[],
-    intent: string = "redaction"
+    intent: string = "redaction",
   ) => {
     const validFiles = Array.from(uploadedFiles).filter(
-      (file) => file.type === "application/pdf"
+      (file) => file.type === "application/pdf",
     );
 
     // Get actual page counts for all valid files
@@ -305,7 +304,7 @@ export default function LegalRedactorHomepage() {
             <p className="text-xl text-slate-600 mb-8 leading-relaxed">
               Automatic PII detection, bulk processing, and HIPAA-compliant
               redaction for law firms. Stop wasting hours on manual redaction or
-              paying $5/page to outsource it.
+              paying $5/page to outsource it..
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -684,8 +683,8 @@ export default function LegalRedactorHomepage() {
                       freeButtonContent.variant === "current"
                         ? "bg-green-100 text-green-800 border-2 border-green-200 cursor-not-allowed"
                         : freeButtonContent.variant === "downgrade"
-                        ? "bg-slate-100 text-slate-700 border-2 border-slate-200 hover:bg-slate-200"
-                        : "bg-slate-900 text-white hover:bg-slate-800"
+                          ? "bg-slate-100 text-slate-700 border-2 border-slate-200 hover:bg-slate-200"
+                          : "bg-slate-900 text-white hover:bg-slate-800"
                     }`}
                   >
                     {freeButtonContent.variant === "current" && (
@@ -755,16 +754,17 @@ export default function LegalRedactorHomepage() {
                         proButtonContent.disabled
                           ? undefined
                           : proButtonContent.variant === "upgrade"
-                          ? handleSubscribe
-                          : () => router.push("/auth/signup?plan=professional")
+                            ? handleSubscribe
+                            : () =>
+                                router.push("/auth/signup?plan=professional")
                       }
                       disabled={proButtonContent.disabled}
                       className={`w-full py-3 rounded-lg font-semibold transition shadow-lg hover:shadow-xl flex items-center justify-center gap-2 ${
                         proButtonContent.variant === "current"
                           ? "bg-green-100 text-green-800 border-2 border-green-200 cursor-not-allowed"
                           : proButtonContent.variant === "upgrade"
-                          ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800"
-                          : "bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800"
+                            ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800"
+                            : "bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800"
                       }`}
                     >
                       {proButtonContent.variant === "current" && (
@@ -829,12 +829,12 @@ export default function LegalRedactorHomepage() {
                         tool.name === "Merge PDF"
                           ? "merge"
                           : tool.name === "Split PDF"
-                          ? "split"
-                          : tool.name === "Compress PDF"
-                          ? "compress"
-                          : tool.name === "PDF to Word"
-                          ? "convert"
-                          : "redaction";
+                            ? "split"
+                            : tool.name === "Compress PDF"
+                              ? "compress"
+                              : tool.name === "PDF to Word"
+                                ? "convert"
+                                : "redaction";
                       handleFileUpload(Array.from(target.files), intent);
                     }
                   };
@@ -855,10 +855,10 @@ export default function LegalRedactorHomepage() {
                     {tool.name === "Merge PDF"
                       ? "merge"
                       : tool.name === "Split PDF"
-                      ? "split"
-                      : tool.name === "Compress PDF"
-                      ? "compress"
-                      : "convert"}
+                        ? "split"
+                        : tool.name === "Compress PDF"
+                          ? "compress"
+                          : "convert"}
                   </span>
                   <ChevronRight className="w-4 h-4" />
                 </div>
