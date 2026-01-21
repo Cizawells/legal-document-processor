@@ -304,7 +304,7 @@ export default function LegalRedactorHomepage() {
             <p className="text-xl text-slate-600 mb-8 leading-relaxed">
               Automatic PII detection, bulk processing, and HIPAA-compliant
               redaction for law firms. Stop wasting hours on manual redaction or
-              paying $5/page to outsource it..
+              paying $5/page to outsource it.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
