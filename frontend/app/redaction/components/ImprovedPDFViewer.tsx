@@ -631,6 +631,7 @@ const ImprovedPDFViewer: React.FC<ImprovedPDFViewerProps> = React.memo(
           // Render the page with proper settings
           const renderContext = {
             canvasContext: context,
+            canvas: canvas,
             viewport: viewport,
             intent: "display" as const,
             renderInteractiveForms: false,
@@ -837,17 +838,17 @@ const ImprovedPDFViewer: React.FC<ImprovedPDFViewerProps> = React.memo(
 
       return (
         <div
-          className={`w-48 bg-white border-r border-slate-200 flex flex-col transition-all duration-300 ${
-            showThumbnails ? "block" : "hidden xl:block"
+          className={`w-48 max-h-screen h-full bg-white border-r border-slate-200 flex flex-col transition-all duration-300 ${
+            showThumbnails ? "flex" : "hidden xl:flex"
           }`}
         >
-          <div className="p-4 border-b border-slate-200">
+          <div className="p-4 border-b border-slate-200 flex-shrink-0">
             <h3 className="text-sm font-semibold text-slate-700">
               Pages ({totalPages})
             </h3>
           </div>
-          <div className="flex-1 overflow-y-auto p-4">
-            <div className="space-y-3">
+          <div className="flex-1 min-h-0 overflow-y-auto">
+            <div className="space-y-3 p-4">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                 (pageNum) => {
                   const pageRedactions = redactionAreas.filter(
@@ -1016,14 +1017,14 @@ const ImprovedPDFViewer: React.FC<ImprovedPDFViewerProps> = React.memo(
     }
 
     return (
-      <div className="flex h-full bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+      <div className="flex h-screen bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden" >
         {/* Thumbnails Sidebar */}
         {renderThumbnails()}
 
         {/* Main PDF Viewer */}
         <div className="flex-1 flex flex-col">
           {/* Top Toolbar */}
-          <div className="bg-white border-b border-slate-200 p-2 md:p-3 lg:p-4">
+          <div className="bg-white border-b border-slate-200 p-2 md:p-3 lg:p-4 overflow-hidden">
             <div className="flex items-center justify-between gap-3">
               {/* Left Controls */}
               <div className="flex items-center gap-2 md:gap-3">
