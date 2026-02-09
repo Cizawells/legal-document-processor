@@ -39,16 +39,14 @@ let isWorkerReady = false;
 if (typeof window !== "undefined") {
   workerInitialized = (async () => {
     try {
-      const [reactPdf, pdfjsDist] = await Promise.all([
-        import("react-pdf"),
-        import("pdfjs-dist"),
-      ]);
+      const reactPdf = await import("react-pdf");
+      const pdfjs = reactPdf.pdfjs;
 
       // Use the local worker that's copied by the build script
       const workerSrc = "/pdf-worker/pdf.worker.min.js";
 
-      reactPdf.pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
-      pdfjsDist.GlobalWorkerOptions.workerSrc = workerSrc;
+      // Set worker on the pdfjs instance used by react-pdf to ensure versions match
+      pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
 
       isWorkerReady = true;
       console.log(
@@ -239,7 +237,8 @@ const ImprovedPDFViewer: React.FC<ImprovedPDFViewerProps> = React.memo(
         if (!file || !isClient || !isPdfWorkerReady) return;
 
         try {
-          const pdfjsLib = await import("pdfjs-dist");
+          const reactPdf = await import("react-pdf");
+          const pdfjsLib = reactPdf.pdfjs;
           const arrayBuffer = await file.arrayBuffer();
           const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
           const pdf = await loadingTask.promise;
@@ -557,7 +556,8 @@ const ImprovedPDFViewer: React.FC<ImprovedPDFViewerProps> = React.memo(
           }
 
           // Import PDF.js dynamically
-          const pdfjsLib = await import("pdfjs-dist");
+          const reactPdf2 = await import("react-pdf");
+          const pdfjsLib = reactPdf2.pdfjs;
 
           // Check current worker configuration
           console.log(
@@ -734,7 +734,8 @@ const ImprovedPDFViewer: React.FC<ImprovedPDFViewerProps> = React.memo(
       const results: Array<{ page: number; bbox: number[]; text: string }> = [];
 
       try {
-        const pdfjsLib = await import("pdfjs-dist");
+        const reactPdf3 = await import("react-pdf");
+        const pdfjsLib = reactPdf3.pdfjs;
         const arrayBuffer = await file.arrayBuffer();
         const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
         const pdf = await loadingTask.promise;

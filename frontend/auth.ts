@@ -76,6 +76,7 @@ export const {
 
       // For OAuth providers, sync user to your database
       if (account?.provider === "google" && user) {
+        console.log("OAuth sync - user:", user);
         try {
           // Check if user exists in your database or create them
           const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/auth/oauth`;

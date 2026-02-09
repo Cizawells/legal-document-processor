@@ -22,7 +22,7 @@ function SignInContent() {
   }, [searchParams]);
 
   const handleGoogleSignIn = () => {
-    const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
+    const callbackUrl = searchParams.get("callbackUrl") || "/";
     signIn("google", { callbackUrl });
   };
 

@@ -8,24 +8,24 @@ import { EmailService } from './email.service';
 @Module({
   imports: [
     MailerModule.forRootAsync({
-      useFactory: () => {
-        console.log('📧 Email configuration:');
-        console.log(
-          '  - SMTP_HOST:',
-          process.env.SMTP_HOST || 'smtp.gmail.com',
-        );
-        console.log('  - SMTP_PORT:', process.env.SMTP_PORT || '587');
-        console.log('  - SMTP_SECURE:', process.env.SMTP_SECURE === 'true');
-        console.log(
-          '  - SMTP_USER:',
-          process.env.SMTP_USER ? '***configured***' : 'NOT SET',
-        );
-        console.log(
-          '  - SMTP_PASS:',
-          process.env.SMTP_PASS ? '***configured***' : 'NOT SET',
-        );
-        console.log('  - NODE_ENV:', process.env.NODE_ENV);
-        console.log('  - Platform:', process.platform);
+      useFactory: () => {``
+        // console.log('📧 Email configuration:');
+        // console.log(
+        //   '  - SMTP_HOST:',
+        //   process.env.SMTP_HOST || 'smtp.gmail.com',
+        // );
+        // console.log('  - SMTP_PORT:', process.env.SMTP_PORT || '587');
+        // console.log('  - SMTP_SECURE:', process.env.SMTP_SECURE === 'true');
+        // console.log(
+        //   '  - SMTP_USER:',
+        //   process.env.SMTP_USER ? '***configured***' : 'NOT SET',
+        // );
+        // console.log(
+        //   '  - SMTP_PASS:',
+        //   process.env.SMTP_PASS ? '***configured***' : 'NOT SET',
+        // );
+        // console.log('  - NODE_ENV:', process.env.NODE_ENV);
+        // console.log('  - Platform:', process.platform);
 
         return {
           transport: {

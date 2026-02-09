@@ -54,7 +54,7 @@ export default function SignUpPage() {
       const data = await res.json();
 
       // Successfully registered, now redirect to signin
-      router.push("/auth/signin?registered=true");
+      router.push("/");
     } catch (err: any) {
       setError(err?.message || "Something went wrong. Please try again.");
     } finally {
